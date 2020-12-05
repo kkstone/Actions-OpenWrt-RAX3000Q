@@ -13,5 +13,5 @@
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 sed -i '104a set wireless.radio${devidx}.rts=2347\set wireless.radio${devidx}.frag=1500' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i "s/\/usr\/bin\/xray\//\/usr\/bin\/xray\/xray\//g" package/openwrt-packages/blob/master/luci-app-passwall/root/etc/config/passwall
-sed -i "s/\/usr\/bin\/v2ray\//\/usr\/bin\/v2ray\/v2ray\//g" package/openwrt-packages/blob/master/luci-app-passwall/root/etc/config/passwall
+sed -i "s/\/usr\/bin\/xray\//\/usr\/bin\/xray\/xray\//g" package/openwrt-packages/luci-app-passwall/root/etc/config/passwall
+sed -i "s/\/usr\/bin\/v2ray\//\/usr\/bin\/v2ray\/v2ray\//g" package/openwrt-packages/luci-app-passwall/root/etc/config/passwall

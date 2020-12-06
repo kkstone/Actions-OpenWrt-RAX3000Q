@@ -19,7 +19,7 @@ on:
         required: false
         default: 'false'
   schedule:
-    - cron: 0 8 * * 5
+    - cron: 0 8 * * 2
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -33,7 +33,7 @@ env:
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: true
-  IMAGE_VERSION: GeneralVer
+  IMAGE_VERSION: Minimal
   TZ: Asia/Shanghai
 
 jobs:

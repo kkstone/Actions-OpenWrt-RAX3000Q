@@ -30,4 +30,4 @@ Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 
 ## License
 
-[MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX
+[MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX 

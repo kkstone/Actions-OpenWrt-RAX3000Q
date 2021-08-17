@@ -18,4 +18,4 @@
 cd package
 
 git clone https://github.com/fw876/helloworld.git
-
+git clone https://github.com/kenzok8/openwrt-packages.git

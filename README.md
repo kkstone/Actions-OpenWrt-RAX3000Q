@@ -20,13 +20,8 @@ Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 - [Cisco](https://www.cisco.com/)
 - [OpenWrt](https://github.com/openwrt/openwrt)
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
-- [Cowtransfer](https://cowtransfer.com)
-- [WeTransfer](https://wetransfer.com/)
-- [Mikubill/transfer](https://github.com/Mikubill/transfer)
-- [luci-app-jd-dailybonus](https://github.com/jerrykuku/luci-app-jd-dailybonus)
 - [luci-app-adguardhome](https://github.com/rufengsuixing/luci-app-adguardhome)
 - [kenzo's openwrt-packages collection](https://github.com/kenzok8/openwrt-packages)
-- [luci-app-serverchand](https://github.com/zzsj0928/luci-app-serverchand)
 
 ## License
 

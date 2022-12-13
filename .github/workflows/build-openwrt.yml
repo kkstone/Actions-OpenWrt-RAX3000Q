@@ -32,7 +32,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
   UPLOAD_RELEASE: true
-  IMAGE_VERSION: Minimal
+  IMAGE_VERSION: Minimal-PassWall
   TZ: Asia/Shanghai
 
 jobs:

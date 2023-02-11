@@ -142,7 +142,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M").${{ env.IMAGE_VERSION }}"
+        echo "name=release_tag::$(date +"%Y.%m.%d-%H%M").${{ env.IMAGE_VERSION }}" >> $GITHUB_OUTPUT
         touch release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT

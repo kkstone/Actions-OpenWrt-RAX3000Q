@@ -14,7 +14,6 @@
 
 
 # Add a feed source
-sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
-#cd package
-
-#git clone https://github.com/kenzok8/small-package.git
+#sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
+cd package
+git clone https://github.com/kenzok8/small-package.git

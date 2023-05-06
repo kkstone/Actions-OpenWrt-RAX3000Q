@@ -14,4 +14,5 @@
 
 
 # Add a feed source
-sed -i '$a src-git small_package https://github.com/kenzok8/small-package.git' feeds.conf.default
+sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
+sed -i '$a src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git;luci' feeds.conf.default

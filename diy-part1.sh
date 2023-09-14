@@ -17,3 +17,4 @@
 cd package
 git clone https://github.com/kenzok8/small.git
 git clone https://github.com/kenzok8/small-package.git
+rm -rf small-package/upx

@@ -16,4 +16,3 @@
 # Add a feed source
 cd package
 git clone https://github.com/kenzok8/small.git
-git clone https://github.com/kenzok8/small-package.git

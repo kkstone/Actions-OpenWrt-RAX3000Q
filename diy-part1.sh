@@ -17,4 +17,4 @@ wget https://gist.github.com/kkstone/d531dab3fd8b37ba692902ce2c06cde3/raw/da951a
 
 # Add a feed source
 cd package
-git clone https://github.com/kenzok8/small.git
+git clone https://github.com/kiddin9/openwrt-packages.git

@@ -19,5 +19,5 @@ wget https://gist.github.com/kkstone/d531dab3fd8b37ba692902ce2c06cde3/raw/da951a
 cd package
 git clone https://github.com/kenzok8/small.git
 git clone https://github.com/kenzok78/luci-app-adguardhome.git
-git clone https://github.com/animegasan/luci-app-wolplus.git
+git clone https://github.com/sundaqiang/openwrt-packages.git
 

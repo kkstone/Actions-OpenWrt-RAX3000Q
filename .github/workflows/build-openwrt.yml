@@ -18,21 +18,20 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
+        type: boolean
   schedule:
     - cron: 0 8 * * 2
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/kkstone/immortalwrt-ipq50xx
+  REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: true
   UPLOAD_RELEASE: true
-  IMAGE_VERSION: Minimal-PassWall
   TZ: Asia/Shanghai
 
 jobs:
@@ -49,7 +48,12 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+        sudo -E apt-get -qq install ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
+        bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
+        git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
+        libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
+        mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils \
+        rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev zstd
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
@@ -76,13 +80,55 @@ jobs:
     - name: Fix golang version
       run: |
         cd openwrt
-        rm -rf feeds/luci/applications/luci-app-mosdns
-        rm -rf feeds/packages/net/{alist,adguardhome,xray*,v2ray*,v2ray*,sing*}
         rm -rf feeds/packages/lang/golang
         git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
+
+    - name: Upgrade some network software version
+      run: |
+        cd openwrt
+        rm -rf feeds/packages/net/zerotier
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/zerotier/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/zerotier feeds/packages/net/zerotier/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/zerotier -name index.html -exec rm {} \;
+
+        rm -rf feeds/packages/net/tcping/Makefile
+        wget -O Makefile-tcping https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/tcping/Makefile
+        cp -rf Makefile-tcping feeds/packages/net/tcping/Makefile
+        rm -rf Makefile-tcping
+
+        rm -rf feeds/packages/net/natmap
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/natmap -name index.html -exec rm {} \;
+
+        rm -rf feeds/packages/net/smartdns
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns feeds/packages/net/smartdns/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/smartdns -name index.html -exec rm {} \;
+
+        rm -rf feeds/packages/net/ddns-go
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go feeds/packages/net/ddns-go/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/ddns-go -name index.html -exec rm {} \;
+
+        rm -rf feeds/packages/net/ttyd
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ttyd/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ttyd feeds/packages/net/ttyd/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/ttyd -name index.html -exec rm {} \;       
+
+        rm -rf feeds/packages/net/frp
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp feeds/packages/net/frp/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/frp -name index.html -exec rm {} \; 
 
     - name: Load custom configuration
       run: |
@@ -98,6 +144,13 @@ jobs:
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+    - name: Fix some download failed first
+      run: |
+        cd openwrt
+        mkdir dl
+        wget https://qsdk.166555.xyz/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz -O dl/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz
+        wget https://qsdk.166555.xyz/linux-5.4-qsdk-11.5.0.5.tar.xz -O dl/linux-5.4-qsdk-11.5.0.5.tar.xz
 
     - name: Download package
       id: package
@@ -150,7 +203,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M").${{ env.IMAGE_VERSION }}" >> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 

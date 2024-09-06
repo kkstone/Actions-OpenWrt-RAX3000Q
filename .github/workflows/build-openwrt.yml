@@ -151,6 +151,10 @@ jobs:
         rm -rf cdn.jsdelivr.net
         find feeds/packages/net/frp -name index.html -exec rm {} \; 
 
+        wget https://qsdk.166555.xyz/luci-app-turboacc.zip
+        rm -rf feeds/luci/applications/luci-app-turboacc
+        unzip luci-app-turboacc.zip -d feeds/luci/applications/
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files

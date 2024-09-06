@@ -1,7 +1,7 @@
 
-Build OpenWrt for P&W R619AC using GitHub Actions
+Build Immortalwrt for CMCC RAX3000Q/QY using GitHub Actions
 
-Kernel Version : 5.10
+Kernel Version : 5.4
 
 Support IPV6
 
@@ -18,10 +18,7 @@ Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 - [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate)
 - [csexton/debugger-action](https://github.com/csexton/debugger-action)
 - [Cisco](https://www.cisco.com/)
-- [OpenWrt](https://github.com/openwrt/openwrt)
-- [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
-- [luci-app-adguardhome](https://github.com/rufengsuixing/luci-app-adguardhome)
-- [kenzo's openwrt-packages collection](https://github.com/kenzok8/openwrt-packages)
+- [ImmortalWrt](https://github.com/kkstone/immortalwrt-ipq50xx)
 
 ## License
 

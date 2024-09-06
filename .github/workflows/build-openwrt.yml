@@ -67,6 +67,13 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
+    - name: Enable build ccache
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
+        mixkey: 'immortalwrt21-cortexa7-vfpv4'
+        prefix: ${{ github.workspace }}/openwrt
+
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default

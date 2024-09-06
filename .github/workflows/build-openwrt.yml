@@ -154,6 +154,7 @@ jobs:
         wget https://qsdk.166555.xyz/luci-app-turboacc.zip
         rm -rf feeds/luci/applications/luci-app-turboacc
         unzip luci-app-turboacc.zip -d feeds/luci/applications/
+        rm -rf luci-app-turboacc.zip
 
     - name: Load custom configuration
       run: |

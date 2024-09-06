@@ -9,7 +9,3 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
-
-# Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
-sed -i '104a set wireless.radio${devidx}.rts=2347\set wireless.radio${devidx}.frag=1500' package/kernel/mac80211/files/lib/wifi/mac80211.sh

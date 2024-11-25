@@ -10,6 +10,7 @@ Kernel Version : 5.4-QSDK
 Base from [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 
 Get SSH: [GetSSH](https://hugo.utermux.dev/default/rax3000q-latest/)
+
 UBoot: [UBoot](https://github.com/hzyitc/openwrt-redmi-ax3000/issues/73#issuecomment-2259591683) Set computer ip to:192.168.1.8, use LAN1 port.
 
 ## Acknowledgments

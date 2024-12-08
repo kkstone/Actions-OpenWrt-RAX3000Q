@@ -116,16 +116,6 @@ jobs:
     - name: Upgrade some network software version
       run: |
         cd openwrt
-        rm -rf feeds/packages/net/zerotier
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/zerotier/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/zerotier feeds/packages/net/zerotier/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/zerotier -name index.html -exec rm {} \;
-
-        rm -rf feeds/packages/net/tcping/Makefile
-        wget -O Makefile-tcping https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/tcping/Makefile
-        cp -rf Makefile-tcping feeds/packages/net/tcping/Makefile
-        rm -rf Makefile-tcping
 
         rm -rf feeds/packages/net/natmap
         wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
